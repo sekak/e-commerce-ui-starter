@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { use } from 'react'
 import SearchBar from './SearchBar'
 import { Bell, Home } from 'lucide-react'
 import ShoppingCart from './ShoppingCart'

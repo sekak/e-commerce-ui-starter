@@ -1,20 +1,20 @@
-import { ShippingFormData, shippingSchema } from '@/types';
+import { ShippingType, DataPropsType, shippingSchema } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 
-function ShippingForm({ onSubmit }: { onSubmit: (data: ShippingFormData, isValid: boolean) => void }) {
+function ShippingForm({ onSubmit } : DataPropsType ) {
 
-  const { register, formState: { errors, isValid }, watch, getValues } = useForm<ShippingFormData>({ resolver: zodResolver(shippingSchema), mode: 'onChange' });
+  const { register, formState: { errors, isValid }, watch, getValues } = useForm<ShippingType>({ resolver: zodResolver(shippingSchema), mode: 'onChange' });
 
   const watchedData = watch(); // Watches ALL form fields
 
   useEffect(() => {
     if (isValid && onSubmit) {
-      onSubmit(getValues(), isValid);
+      onSubmit(getValues(), isValid, "shipping");
     }
     else if (onSubmit) {
-      onSubmit(getValues(), isValid);
+      onSubmit(null, isValid, "shipping");
     }
   }, [watchedData, isValid, getValues, onSubmit]);
 
